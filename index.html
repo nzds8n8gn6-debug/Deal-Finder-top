@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101713">
+<meta name="description" content="DealFinder: trova e confronta offerte per scarpe, gaming e audio.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<title>DealFinder</title>
+<style>
+:root{color-scheme:dark;--bg:#0c110e;--panel:#151e19;--panel2:#1b2821;--line:#29382f;--text:#f1f7f2;--muted:#9aada0;--mint:#9bf2c0;--mint2:#55d995;--orange:#ffbd72}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#1d3829 0,transparent 45%),var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+button,input{font:inherit}button{cursor:pointer}
+.app{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 16px 24px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 2px 18px}
+.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:850;letter-spacing:-.7px}.logo{width:36px;height:36px;border-radius:12px;background:var(--mint);display:grid;place-items:center;color:#102016;font-weight:950;font-size:22px}
+.pill{border:1px solid #385543;color:var(--mint);font-size:11px;font-weight:750;letter-spacing:.6px;padding:6px 9px;border-radius:20px}
+h1{font-size:30px;line-height:1.08;letter-spacing:-1.2px;margin:12px 0 8px}h1 span{color:var(--mint)}.sub{color:var(--muted);margin:0 0 20px}
+.search{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:0 14px;height:54px}.search input{background:none;border:0;outline:0;color:var(--text);width:100%;font-size:16px}.search input::placeholder{color:#829389}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:24px 0 12px}.section-head h2{font-size:17px;margin:0;letter-spacing:-.3px}.muted{color:var(--muted);font-size:12px}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.cat{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px 10px;text-align:left;color:var(--text);min-height:86px}.cat.active{border-color:var(--mint2);background:#1b3025;box-shadow:inset 0 0 0 1px #55d99533}.cat .emoji{font-size:22px;display:block;margin-bottom:7px}.cat b{font-size:12px}
+.toolbar{display:flex;gap:8px;overflow:auto;padding-bottom:4px;scrollbar-width:none}.toolbar::-webkit-scrollbar{display:none}.chip{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:22px;padding:8px 13px;font-size:12px}.chip.active{background:var(--mint);border-color:var(--mint);color:#102016;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.product{background:linear-gradient(145deg,#1a2720,#121a15);border:1px solid var(--line);border-radius:17px;padding:12px;min-width:0;position:relative}.product-top{display:flex;justify-content:space-between;align-items:flex-start}.visual{height:102px;border-radius:12px;background:linear-gradient(135deg,#263b2f,#17231b);display:grid;place-items:center;font-size:42px;margin:9px 0 11px}.tag{font-size:10px;color:var(--mint);font-weight:800;text-transform:uppercase;letter-spacing:.5px}.heart{border:0;background:#25342b;color:#dce9df;border-radius:50%;width:31px;height:31px;font-size:17px}.heart.on{color:#ff8a9c}.product h3{font-size:14px;line-height:1.25;margin:5px 0 4px;min-height:35px}.maker{font-size:11px;color:var(--muted)}.price-row{display:flex;align-items:baseline;gap:7px;margin-top:10px}.price{font-size:20px;font-weight:850;letter-spacing:-.5px}.old{font-size:11px;color:#809087;text-decoration:line-through}.deal{font-size:10px;color:#102016;background:var(--mint);font-weight:850;border-radius:5px;padding:3px 5px;margin-left:auto}.store{font-size:10px;color:var(--muted);margin-top:5px}.disclaimer{font-size:11px;color:#8d9e92;background:#111a14;border:1px dashed #34463a;border-radius:12px;padding:10px 12px;margin-top:16px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#101713ed;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:9px 10px calc(9px + env(safe-area-inset-bottom));display:flex;justify-content:center;z-index:5}.nav{width:min(760px,100%);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.nav button{border:0;background:none;color:var(--muted);padding:7px 4px;border-radius:12px;font-size:11px}.nav button span{display:block;font-size:19px;margin-bottom:2px}.nav button.active{color:var(--mint);background:#1c2b22}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:32px 12px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+.hidden{display:none!important}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.visual{height:120px}.categories{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">D</div>DealFinder</div><div class="pill">ITALIA · BETA</div></header>
+<main>
+<section id="home">
+<h1>Il prezzo giusto,<br><span>senza perdere tempo.</span></h1>
+<p class="sub">Cerca offerte per i tuoi prodotti preferiti.</p>
+<label class="search"><span>⌕</span><input id="search" type="search" placeholder="Cerca scarpe, giochi, cuffie..." autocomplete="off"></label>
+<div class="section-head"><h2>Le tue categorie</h2><span class="muted">Seleziona</span></div>
+<div class="categories">
+<button class="cat active" data-cat="Tutte"><span class="emoji">✦</span><b>Tutte</b></button>
+<button class="cat" data-cat="Scarpe"><span class="emoji">👟</span><b>Scarpe</b></button>
+<button class="cat" data-cat="Gaming"><span class="emoji">🎮</span><b>Gaming</b></button>
+<button class="cat" data-cat="Controller"><span class="emoji">🕹️</span><b>Controller</b></button>
+<button class="cat" data-cat="Audio"><span class="emoji">🎧</span><b>Cuffie e audio</b></button>
+<button class="cat" data-cat="Console"><span class="emoji">🖥️</span><b>Console</b></button>
+</div>
+<div class="section-head"><h2 id="listTitle">Offerte in evidenza</h2><span class="muted" id="count"></span></div>
+<div class="toolbar" id="filters">
+<button class="chip active" data-filter="all">Tutte</button><button class="chip" data-filter="price">Prezzo più basso</button><button class="chip" data-filter="discount">Sconto maggiore</button><button class="chip" data-filter="saved">Preferiti</button>
+</div>
+<div class="grid" id="products" style="margin-top:12px"></div>
+<div class="disclaimer">Anteprima dimostrativa: prodotti e prezzi mostrati sono dati di esempio, non offerte verificate. Il collegamento ai prezzi reali dei negozi verrà aggiunto nella fase di integrazione delle fonti.</div>
+</section>
+<section id="savedView" class="hidden"><div class="section-head"><h2>I tuoi preferiti</h2></div><div class="grid" id="savedProducts"></div></section>
+<section id="aboutView" class="hidden"><h1>Benvenuto in <span>DealFinder.</span></h1><p class="sub">Un unico posto per confrontare occasioni su scarpe, videogiochi, console, controller e audio.</p><div class="disclaimer">Questa è la prima versione installabile della web app. I preferiti vengono salvati sul dispositivo. Per mostrare offerte reali servono fonti prezzi/negozi aggiornate e relativi collegamenti.</div></section>
+</main>
+</div>
+<nav class="bottom"><div class="nav"><button class="active" data-view="home"><span>⌂</span>Home</button><button data-view="savedView"><span>♡</span>Preferiti</button><button data-view="aboutView"><span>ⓘ</span>Info</button></div></nav>
+<script>
+const items=[
+{id:1,name:"Scarpa outdoor impermeabile",brand:"Esempio · Scarpe",cat:"Scarpe",price:89.90,old:129.90,emoji:"🥾",store:"Negozio demo"},
+{id:2,name:"Sneaker comfort daily",brand:"Esempio · Scarpe",cat:"Scarpe",price:69.90,old:99.90,emoji:"👟",store:"Negozio demo"},
+{id:3,name:"Avventura open world",brand:"Esempio · Videogiochi",cat:"Gaming",price:39.90,old:59.90,emoji:"🗡️",store:"Negozio demo"},
+{id:4,name:"Controller wireless",brand:"Esempio · Accessori",cat:"Controller",price:49.90,old:69.90,emoji:"🎮",store:"Negozio demo"},
+{id:5,name:"Cuffie wireless ANC",brand:"Esempio · Audio",cat:"Audio",price:79.90,old:119.90,emoji:"🎧",store:"Negozio demo"},
+{id:6,name:"Console portatile",brand:"Esempio · Console",cat:"Console",price:299.90,old:349.90,emoji:"🕹️",store:"Negozio demo"}
+];
+let category="Tutte",filter="all",query="",saved=JSON.parse(localStorage.getItem("df-saved")||"[]");
+const euro=n=>n.toLocaleString("it-IT",{style:"currency",currency:"EUR"});
+const discount=p=>Math.round((1-p.price/p.old)*100);
+function card(p){let on=saved.includes(p.id);return `<article class="product"><div class="product-top"><span class="tag">${p.cat}</span><button class="heart ${on?"on":""}" data-save="${p.id}" aria-label="Salva preferito">${on?"♥":"♡"}</button></div><div class="visual">${p.emoji}</div><div class="maker">${p.brand}</div><h3>${p.name}</h3><div class="price-row"><span class="price">${euro(p.price)}</span><span class="old">${euro(p.old)}</span><span class="deal">-${discount(p)}%</span></div><div class="store">${p.store} · prezzo demo</div></article>`}
+function render(){
+let list=items.filter(p=>(category==="Tutte"||p.cat===category)&&(!query||(p.name+" "+p.brand+" "+p.cat).toLowerCase().includes(query))&&(filter!=="saved"||saved.includes(p.id)));
+if(filter==="price")list.sort((a,b)=>a.price-b.price);if(filter==="discount")list.sort((a,b)=>discount(b)-discount(a));
+document.getElementById("products").innerHTML=list.length?list.map(card).join():'<div class="empty">Nessun prodotto trovato.<br>Prova a cambiare ricerca o filtro.</div>';
+document.getElementById("count").textContent=list.length+" prodotti";
+document.getElementById("listTitle").textContent=filter==="saved"?"I tuoi preferiti":category==="Tutte"?"Offerte in evidenza":category;
+document.getElementById("savedProducts").innerHTML=items.filter(p=>saved.includes(p.id)).map(card).join()||'<div class="empty">Non hai ancora salvato prodotti.</div>';
+document.querySelectorAll("[data-cat]").forEach(b=>b.classList.toggle("active",b.dataset.cat===category));
+document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
+}
+document.addEventListener("click",e=>{
+const s=e.target.closest("[data-save]");if(s){let id=+s.dataset.save;saved=saved.includes(id)?saved.filter(x=>x!==id):[...saved,id];localStorage.setItem("df-saved",JSON.stringify(saved));render();return}
+const c=e.target.closest("[data-cat]");if(c){category=c.dataset.cat;filter="all";render();return}
+const f=e.target.closest("[data-filter]");if(f){filter=f.dataset.filter;render();return}
+const v=e.target.closest("[data-view]");if(v){document.querySelectorAll("main>section").forEach(x=>x.classList.toggle("hidden",x.id!==v.dataset.view));document.querySelectorAll("[data-view]").forEach(x=>x.classList.toggle("active",x===v));}
+});
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();render()});
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+render();
+</script>
+</body></html>

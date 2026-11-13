@@ -1,0 +1,19 @@
+{
+  "name": "DealFinder",
+  "short_name": "DealFinder",
+  "description": "Confronta offerte per scarpe, gaming e audio.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c110e",
+  "theme_color": "#101713",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
